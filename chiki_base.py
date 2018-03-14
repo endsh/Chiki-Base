@@ -15,7 +15,7 @@ import urlparse
 from urllib import urlencode
 from datetime import datetime, date
 from StringIO import StringIO
-from flask import jsonify, current_app, request, redirect
+from flask import jsonify, current_app, request, redirect, render_template
 from flask.ext.login import current_user
 
 import urllib3
@@ -30,6 +30,7 @@ __all__ = [
     'url_with_user', 'get_url_arg', 'create_short_url', 'ip_limit',
     'random_index', 'is_debug', 'sign', 'add_args', 'import_file',
     'unicode2utf8', 'json2utf8', 'url_external', 'is_wechat',
+    'success', 'error', 'message',
 ]
 
 
@@ -461,3 +462,16 @@ def url_external(url):
     if url.startswith('/'):
         return 'http://' + request.host + url
     return url
+
+
+def message(msg, style='info', url='', timeout=0, **kwargs):
+    return render_template('msg.html', msg=msg, style=style,
+                           url=url, timeout=timeout, **kwargs)
+
+
+def success(msg, url='', timeout=0, **kwargs):
+    return message(msg, style='success', url=url, timeout=timeout, **kwargs)
+
+
+def error(msg, url='', timeout=0, **kwargs):
+    return message(msg, style='warn', url=url, timeout=timeout, **kwargs)
