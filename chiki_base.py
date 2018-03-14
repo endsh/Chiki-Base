@@ -18,6 +18,7 @@ from StringIO import StringIO
 from jinja2 import Markup
 from flask import jsonify, current_app, request, redirect, render_template
 from flask.ext.login import current_user
+from werkzeug.local import LocalProxy
 
 import urllib3
 urllib3.disable_warnings()
@@ -31,8 +32,14 @@ __all__ = [
     'url_with_user', 'get_url_arg', 'create_short_url', 'ip_limit',
     'random_index', 'is_debug', 'sign', 'add_args', 'import_file',
     'unicode2utf8', 'json2utf8', 'url_external', 'is_wechat',
-    'success', 'error', 'message', 'markup',
+    'success', 'error', 'message', 'markup', 'current_db',
 ]
+
+
+def _get_db():
+    return current_app.db
+
+current_db = LocalProxy(lambda: _get_db())
 
 
 class Puppet(object):
