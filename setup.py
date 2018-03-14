@@ -30,7 +30,7 @@ def get_data_files(*dirs):
 
 
 setup(
-    name='Chiki-Base',
+    name='chiki-base',
     version='0.0.1',
     url='https://github.com/endsh/chiki-base',
     author='Linshao',
