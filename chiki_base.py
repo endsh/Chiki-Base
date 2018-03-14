@@ -15,6 +15,7 @@ import urlparse
 from urllib import urlencode
 from datetime import datetime, date
 from StringIO import StringIO
+from jinja2 import Markup
 from flask import jsonify, current_app, request, redirect, render_template
 from flask.ext.login import current_user
 
@@ -30,7 +31,7 @@ __all__ = [
     'url_with_user', 'get_url_arg', 'create_short_url', 'ip_limit',
     'random_index', 'is_debug', 'sign', 'add_args', 'import_file',
     'unicode2utf8', 'json2utf8', 'url_external', 'is_wechat',
-    'success', 'error', 'message',
+    'success', 'error', 'message', 'markup',
 ]
 
 
@@ -475,3 +476,7 @@ def success(msg, url='', timeout=0, **kwargs):
 
 def error(msg, url='', timeout=0, **kwargs):
     return message(msg, style='warn', url=url, timeout=timeout, **kwargs)
+
+
+def markup(html):
+    return Markup(html) if current_app.jinja_env.autoescape else html
