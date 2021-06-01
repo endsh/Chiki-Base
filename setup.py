@@ -44,6 +44,6 @@ setup(
     install_requires=[
         'flask==0.10.1',
         'Flask-Login==0.2.11',
-        'urllib3==1.22',
+        'urllib3==1.26.5',
     ],
 )
